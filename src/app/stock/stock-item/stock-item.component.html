@@ -1,6 +1,6 @@
 <div class="stock-container">
   <div class="name"> {{ stock.name + '('+ stock.code +')'}} </div>
-<div class="price" [ngClass] = "stockClasses">$ {{stock.price}}</div>
+<div class="price" [ngStyle] = "stockStyles">$ {{stock.price}}</div>
   $ {{ stock.price }}
   </div>
   <div>
