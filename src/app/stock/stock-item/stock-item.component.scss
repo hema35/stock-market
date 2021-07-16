@@ -1,0 +1,22 @@
+.stock-container {
+  border: 1px solid black;
+  border-color: chartreuse;
+  border-width: 5px;
+  border-radius: 10px;
+  display: inline-block;
+  padding: 10px;
+  color: rgb(76, 0, 255);
+  background-color: beige;
+}
+.stock-container .name h3,
+.stock-container .name h4 {
+  display: inline-block;
+}
+
+.positive {
+color: green;
+}
+
+.negative {
+  color: red;
+}
