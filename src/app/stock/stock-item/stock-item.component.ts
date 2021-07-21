@@ -35,5 +35,8 @@ export class StockItemComponent {
     // this.stock.favorite = !this.stock.favorite;
     this.toggleFavorite.emit(this.stock);
   }
+  changeStockPrice() {
+    this.stock.price += 5;
+  }
 
 }
