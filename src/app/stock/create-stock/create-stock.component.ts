@@ -9,9 +9,10 @@ import { Stock } from 'src/app/model/stock';
 export class CreateStockComponent  {
 
 public stock: Stock;
+public exchanges = ['NYSE', 'NASDAQ', 'OTHER'];
 public confirmed = false;
   constructor() {
-    this.stock = new Stock('test','',0,0,'NASDAQ');
+    this.stock = new Stock('','',0,0,'NASDAQ');
    }
 
    setStockPrice(price) {
@@ -19,10 +20,14 @@ public confirmed = false;
      this.stock.previousPrice = price;
    }
 
-   createStock() {
+   createStock(stockForm) {
+     console.log('Stock form', stockForm);
+     if(stockForm.valid) {
      console.log('Creating stock', this.stock);
+   } else {
+     console.error('Stock form is in an invalid state');
    }
 
   }
 
-
+}

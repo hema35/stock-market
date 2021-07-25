@@ -1,22 +1,39 @@
 <h2>Create Stock Form</h2>
 
-<div class="Form-group">
-  <form (ngSubmit)="createStock()">
+<div class="form-group">
+  <form (ngSubmit)="createStock(stockForm)" #stockForm="ngForm">
+    <div>The following element changes from green to red when it is invalid</div>
     <div class="stock-name">
-      <input type="text" placeholder="Stock Name" name="stockName" [(ngModel)]="stock.name">
+      <input type="text" placeholder="Stock Name" name="stockName" required #stockName="ngModel" [(ngModel)]="stock.name">
     </div>
-
-    <div class="stock-code">
-      <input type="text" placeholder="Stock Code" name="stockCode" [(ngModel)]="stock.code">
+    <div *ngIf="stockName.errors && stockName.errors.required">
+      Stock Name is Mandatory
     </div>
-
+<div>The following element changes from green to red when it has been modified</div>
     <div class="stock-code">
-      <input type="number" placeholder="Stock Price" name="stockPrice" [(ngModel)]="stock.price"
+      <input type="text" placeholder="Stock Code" required minlength="2" name="stockCode" #stockCode="ngModel" [(ngModel)]="stock.code">
+    </div>
+    <div *ngIf="stockCode.dirty && stockCode.invalid">
+      <div *ngIf="stockCode.errors.required">
+        Stock Code is Mandatory
+      </div>
+      <div *ngIf="stockCode.errors.minlength">Stock Code must be atleast of length 2</div>
+    </div>
+<div>The following element changes from green to red when it is visited by the user, regardless of change</div>
+    <div class="stock-price">
+      <input type="number" placeholder="Stock Price" name="stockPrice" required #stockPrice="ngModel" [(ngModel)]="stock.price"
       (ngModelChange)="setStockPrice($event)">
     </div>
-
+<div *ngIf="stockPrice.dirty && stockPrice.invalid">
+  <div *ngIf="stockPrice.errors.required">Stock Price is Mandatory</div>/div>
+</div>
     <div class="stock-exchange">
-      <div>
+      <div><select name="stockExchange" [(ngModel)]="stock.exchange">
+        <option *ngFor="let exchange of exchanges"
+        [ngValue]="exchange">{{exchange}}</option>
+
+      </select></div>
+      <!-- <div>
         <input type="radio" name="stockExchange" [(ngModel)]="stock.exchange" value="NYSE">NYSE
       </div>
 
@@ -28,14 +45,15 @@
       <div>
         <input type="radio" name="stockExchange"
         [(ngModel)]="stock.exchange" value="OTHER">OTHER
-      </div>
+      </div> -->
     </div>
     <div class="stock-confirm">
-      <input type="checkbox" name="stockConfirm"
+      <input type="checkbox" name="stockConfirm" required
        [(ngModel)]="confirmed">I confirm that the information provided is accurate!
     </div>
   </form>
-  <button [disabled]="!confirmed" type="submit">Submit</button>
+  <button type="submit">Create</button>
 </div>
 
-<h4>Stock name is {{stock|json}}</h4>
+<h4>Stock name is {{stock | json}}</h4>
+<h4>Data has been confirmed: {{confirmed}}</h4>
