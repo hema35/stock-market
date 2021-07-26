@@ -15,14 +15,15 @@ public confirmed = false;
     this.stock = new Stock('','',0,0,'NASDAQ');
    }
 
-   setStockPrice(price) {
-     this.stock.price = price;
-     this.stock.previousPrice = price;
-   }
+  //  setStockPrice(price) {
+  //    this.stock.price = price;
+  //    this.stock.previousPrice = price;
+  //  }
 
    createStock(stockForm) {
-     console.log('Stock form', stockForm);
+     console.log('Stock form', stockForm.value);
      if(stockForm.valid) {
+       this.stock = stockForm.value.stock;
      console.log('Creating stock', this.stock);
    } else {
      console.error('Stock form is in an invalid state');
