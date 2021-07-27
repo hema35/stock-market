@@ -1,34 +1,43 @@
 <h2>Create Stock Form</h2>
 
 <div class="form-group">
-  <form [formGroup]="stockForm" (ngSubmit)="onSubmit()"></form>
+  <form [formGroup]="stockForm" (ngSubmit)="onSubmit()">
   <!-- <form (ngSubmit)="createStock(stockForm)" #stockForm="ngForm">
     <div ngModelGroup="stock">
     <div>The following element changes from green to red when it is invalid</div> -->
   <div class="stock-name">
     <input type="text" placeholder="Stock Name" name="stockName" formControlName="name">
-  </div>
-  <!-- <div *ngIf="stockName.errors && stockName.errors.required">
-      Stock Name is Mandatory
-    </div> -->
+
+  <div *ngIf="stockForm.get('name').invalid &&
+  (stockForm.get('name').dirty ||
+  stockForm.get('name').touched)">Name is required</div>
+</div>
   <div>The following element changes from green to red when it has been modified</div>
   <div class="stock-code">
     <input type="text" placeholder="Stock Code" formControlName="code">
+
+
+  <div *ngIf="stockForm.get('code').invalid &&
+  (stockForm.get('code').dirty ||
+  stockForm.get('code').touched)">
+  <div *ngIf="stockForm.get('code').errors.required">Stock code is required</div>
+  <div *ngIf="stockForm.get('code').errors.minlength">
+    Stock Code must be atleast of length 2</div>
   </div>
-  <!-- <div *ngIf="stockCode.dirty && stockCode.invalid">
-      <div *ngIf="stockCode.errors.required">
-        Stock Code is Mandatory
-      </div> -->
-  <!-- <div *ngIf="stockCode.errors.minlength">Stock Code must be atleast of length 2</div>
-    </div> -->
+  </div>
+
   <div>The following element changes from green to red when it is visited by the user, regardless of change</div>
   <div class="stock-price">
     <input type="number" placeholder="Stock Price" formControlName="price">
 
+
+  <div *ngIf="stockForm.get('price').invalid &&
+  (stockForm.get('price').dirty ||
+  stockForm.get('price').touched)">
+  <div *ngIf="stockForm.get('price').errors.required">Stock price is required</div>
+  <div *ngIf="stockForm.get('price').errors.min">Stock price must be positive</div>
+</div>
   </div>
-  <!-- <div *ngIf="stockPrice.dirty && stockPrice.invalid">
-  <div *ngIf="stockPrice.errors.required">Stock Price is Mandatory</div>
-</div> -->
   <!-- <div class="stock-exchange">
     <div><select name="exchange" ngModel>
         <option *ngFor="let exchange of exchanges" [ngValue]="exchange">{{exchange}}</option>
@@ -55,7 +64,7 @@
 <!-- </div> -->
 
 <button type="submit">Submit</button>
-
+</form>
 </div>
 
 <p>Form Control value: {{ stockForm.value | json }}</p>
