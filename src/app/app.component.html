@@ -2,8 +2,10 @@
   <h1>
     Welcome to {{ title }}!
   </h1>
-  <app-stock-item [stock]="stock" (toggleFavorite)="onToggleFavorite($event)"></app-stock-item>
+  <h3>App level: {{messageService.message}}</h3>
+  <!-- <app-stock-item [stock]="stock" (toggleFavorite)="onToggleFavorite($event)"></app-stock-item>
   <button (click)="changeStockObject()">Change Stock</button>
-  <button (click)="changeStockPrice()">Change Price</button>
+  <button (click)="changeStockPrice()">Change Price</button> -->
 </div>
 <app-create-stock></app-create-stock>
+<app-stock-list></app-stock-list>
